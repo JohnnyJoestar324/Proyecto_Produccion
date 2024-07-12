@@ -13,14 +13,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Idproducto" class="control-label"></label>
-                <input asp-for="Idproducto" class="form-control" />
-                <span asp-validation-for="Idproducto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RequerimientoBruto" class="control-label"></label>
-                <input asp-for="RequerimientoBruto" class="form-control" />
-                <span asp-validation-for="RequerimientoBruto" class="text-danger"></span>
+                <label for="RequerimientoBruto">Requerimientos Brutos (separados por comas):</label>
+                <input type="text" id="RequerimientoBruto" name="RequerimientoBruto" required />
+                <br />
             </div>
             <div class="form-group">
                 <label asp-for="Periodo" class="control-label"></label>
@@ -37,16 +32,7 @@
                 <input asp-for="CostoDeOrdenar" class="form-control" />
                 <span asp-validation-for="CostoDeOrdenar" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CostoTotal" class="control-label"></label>
-                <input asp-for="CostoTotal" class="form-control" />
-                <span asp-validation-for="CostoTotal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CostoTotalU" class="control-label"></label>
-                <input asp-for="CostoTotalU" class="form-control" />
-                <span asp-validation-for="CostoTotalU" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

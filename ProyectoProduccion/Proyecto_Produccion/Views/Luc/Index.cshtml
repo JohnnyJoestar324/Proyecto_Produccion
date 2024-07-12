@@ -7,19 +7,17 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Calcular LUC</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            
             <th>
-                @Html.DisplayNameFor(model => model.Idproducto)
+                @Html.DisplayNameFor(model => model.Periodo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RequerimientoBruto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Periodo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CostoMantenimiento)
@@ -38,15 +36,14 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr style="@(item.CostoTotal == Model.Max(x => x.CostoTotal) || item.CostoTotal == Model.OrderByDescending(i => i.CostoTotal).Skip(1).Take(1).FirstOrDefault().CostoTotal ? "text-decoration: underline; background-color: yellow;" : "")">
+
+            
             <td>
-                @Html.DisplayFor(modelItem => item.Idproducto)
+                @Html.DisplayFor(modelItem => item.Periodo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RequerimientoBruto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Periodo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CostoMantenimiento)

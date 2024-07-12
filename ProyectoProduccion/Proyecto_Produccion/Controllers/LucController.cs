@@ -53,10 +53,93 @@ namespace Proyecto_Produccion.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idluc,Idproducto,RequerimientoBruto,Periodo,CostoMantenimiento,CostoDeOrdenar,CostoTotal,CostoTotalU")] Luc luc)
+        public async Task<IActionResult> Create([Bind("Idluc,RequerimientoBruto,Periodo,CostoMantenimiento,CostoDeOrdenar,CostoTotal,CostoTotalU")] Luc luc)
         {
             if (ModelState.IsValid)
             {
+
+                var results = new List<Luc>();
+
+                // Convertir la cadena de requerimientos brutos en una lista de enteros
+                var unidades = Enumerable.Repeat(luc.RequerimientoBruto, luc.Periodo).ToList();
+
+                // Inicializamos los valores para el primer período
+                var periodo = 0;
+                var unidadesPeriodo = unidades[0];
+
+                bool primeraIteracion = true; // Bandera para identificar la primera iteración
+                int sumaAnterior = 0;
+                int sumaAnteriorRequerimiento = 0;
+                decimal sumaAnteriorK = 0;
+                decimal costoTotal;
+                decimal costoTotalAnterior = 0; // Variable para almacenar el costoTotal anterior
+
+
+
+                // Iteramos sobre cada período
+                for (int i = 0; i < luc.Periodo; i++)
+                {
+
+                    // Obtenemos el valor de la fila actual
+                    var periodoActual = unidades[i];
+
+                    // Sumamos el valor actual con el valor de la fila anterior, si existe
+
+
+                    // Calculamos el costo de mantenimiento para el período actual
+                    var costoMantenimientoPeriodo = luc.CostoMantenimiento;
+
+
+
+                    var sumaConAnterior = (i + 1) + sumaAnterior;
+                    sumaAnterior = sumaConAnterior;
+                    var sumaConAnteriorRequerimiento = unidadesPeriodo + sumaAnteriorRequerimiento;
+                    sumaAnteriorRequerimiento = sumaConAnteriorRequerimiento;
+
+                    if (primeraIteracion)
+                    {
+                        sumaAnteriorK = 0; // Primera multiplicación con cero
+                        primeraIteracion = false; // Desactivar la bandera después de la primera iteración
+                        costoTotalAnterior = luc.CostoDeOrdenar;
+
+                    }
+
+                    else
+                    {
+                        var SumaConAnteriorK = luc.CostoMantenimiento * sumaConAnterior * ((i + 1) - 1);
+                        sumaAnteriorK = SumaConAnteriorK;
+                        costoTotal = costoTotalAnterior + sumaAnteriorK; // Sumar costoTotalAnterior con sumaAnteriorK
+                        costoTotalAnterior = costoTotal; // Actualizar costoTotalAnterior
+                    }
+
+
+
+
+                    // costoTotal = item.costoDeOrdenar + sumaAnteriorK;
+                    var costoTotalUnidades = costoTotalAnterior / sumaConAnteriorRequerimiento;
+
+
+
+                    // Guardamos los resultados en la lista
+                    results.Add(new Luc
+                    {
+                        Periodo = sumaConAnterior,
+                        RequerimientoBruto = sumaConAnteriorRequerimiento,
+                        CostoDeOrdenar = luc.CostoDeOrdenar,
+                        CostoMantenimiento = sumaAnteriorK,
+                        CostoTotal = costoTotalAnterior,
+                        CostoTotalU = costoTotalUnidades
+                    }); ;
+
+                    // Actualizamos las unidades para el próximo período
+                    if (i < unidades.Count - 1)
+                    {
+                        unidadesPeriodo = unidades[i + 1];
+                    }
+                }
+
+
+
                 _context.Add(luc);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,7 +168,7 @@ namespace Proyecto_Produccion.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(short id, [Bind("Idluc,Idproducto,RequerimientoBruto,Periodo,CostoMantenimiento,CostoDeOrdenar,CostoTotal,CostoTotalU")] Luc luc)
+        public async Task<IActionResult> Edit(short id, [Bind("Idluc,RequerimientoBruto,Periodo,CostoMantenimiento,CostoDeOrdenar,CostoTotal,CostoTotalU")] Luc luc)
         {
             if (id != luc.Idluc)
             {

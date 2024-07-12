@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Proyecto_Produccion.Models;
 
 namespace Proyecto_Produccion.Data
 {
@@ -9,5 +10,12 @@ namespace Proyecto_Produccion.Data
             : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }
