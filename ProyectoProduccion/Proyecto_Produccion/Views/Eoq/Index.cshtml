@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Proyecto_Produccion.Models.Eoq>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Demanda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoMantenimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodoSeleccionado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resultado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Demanda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoMantenimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodoSeleccionado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resultado)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Ideoq">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

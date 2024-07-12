@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Proyecto_Produccion.Models.Ltc>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Periodo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unidades)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeridodosMantenidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoMantenimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoMantenimientoAcumulado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Periodo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unidades)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeridodosMantenidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoMantenimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoMantenimientoAcumulado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Idltc">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Idltc">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Idltc">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

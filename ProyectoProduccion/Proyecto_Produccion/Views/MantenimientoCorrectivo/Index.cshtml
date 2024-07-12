@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Proyecto_Produccion.Models.MantenimientoCorrectivo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HorasTrabajo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mtbf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroFallas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DuracionTarea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoHoraTrabajo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Repuestos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TareasAdicionales)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RetrasoLogistico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostoFallaUnica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resultado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HorasTrabajo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mtbf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroFallas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DuracionTarea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoHoraTrabajo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Repuestos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TareasAdicionales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RetrasoLogistico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoFallaUnica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resultado)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Idmantenimiento">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
