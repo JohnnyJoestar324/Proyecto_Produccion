@@ -14,9 +14,6 @@
         <tr>
             
             <th>
-                @Html.DisplayNameFor(model => model.Periodo)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.RequerimientoBruto)
             </th>
             <th>
@@ -39,9 +36,6 @@
         <tr style="@(item.CostoTotal == Model.Max(x => x.CostoTotal) || item.CostoTotal == Model.OrderByDescending(i => i.CostoTotal).Skip(1).Take(1).FirstOrDefault().CostoTotal ? "text-decoration: underline; background-color: yellow;" : "")">
 
             
-            <td>
-                @Html.DisplayFor(modelItem => item.Periodo)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RequerimientoBruto)
             </td>

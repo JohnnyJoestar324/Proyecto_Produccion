@@ -13,9 +13,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label for="RequerimientoBruto">Requerimientos Brutos (separados por comas):</label>
-                <input type="text" id="RequerimientoBruto" name="RequerimientoBruto" required />
-                <br />
+                <label asp-for="RequerimientoBruto" class="control-label"></label>
+                <input asp-for="RequerimientoBruto" class="form-control" />
+                <span asp-validation-for="RequerimientoBruto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Periodo" class="control-label"></label>

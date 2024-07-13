@@ -20,3 +20,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.highlight-row {
+    background-color: yellow;
+}
+
+footer.border-top.footer.text-muted {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
