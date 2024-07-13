@@ -1,0 +1,53 @@
+﻿@model Proyecto_Produccion.Models.JitKanban
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>JitKanban</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Demanda" class="control-label"></label>
+                <input asp-for="Demanda" class="form-control" />
+                <span asp-validation-for="Demanda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TiempoVuelta" class="control-label"></label>
+                <input asp-for="TiempoVuelta" class="form-control" />
+                <span asp-validation-for="TiempoVuelta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TamañoRecipiente" class="control-label"></label>
+                <input asp-for="TamañoRecipiente" class="form-control" />
+                <span asp-validation-for="TamañoRecipiente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="N" class="control-label"></label>
+                <input asp-for="N" class="form-control" />
+                <span asp-validation-for="N" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InventarioMaximo" class="control-label"></label>
+                <input asp-for="InventarioMaximo" class="form-control" />
+                <span asp-validation-for="InventarioMaximo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,48 @@
+﻿@model Proyecto_Produccion.Models.JitKanban
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>JitKanban</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Demanda)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Demanda)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TiempoVuelta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TiempoVuelta)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TamañoRecipiente)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TamañoRecipiente)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.N)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.N)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.InventarioMaximo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.InventarioMaximo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdJitKanban">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
