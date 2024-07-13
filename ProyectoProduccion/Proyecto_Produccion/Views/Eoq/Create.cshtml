@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Calcular EOQ</h1>
 
 <h4>EOQ</h4>
 <hr />
@@ -12,22 +12,22 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                
             <div class="form-group">
                 <label asp-for="Demanda" class="control-label"></label>
-                <input asp-for="Demanda" class="form-control" />
+                <input type="number" asp-for="Demanda" class="form-control" min="0" />
                 <span asp-validation-for="Demanda" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="CostoPedido" class="control-label"></label>
-                <input asp-for="CostoPedido" class="form-control" />
+                <input type="number" asp-for="CostoPedido" class="form-control" min="0" />
                 <span asp-validation-for="CostoPedido" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="CostoMantenimiento" class="control-label"></label>
-                <input asp-for="CostoMantenimiento" class="form-control" />
+                <input type="number" asp-for="CostoMantenimiento" class="form-control" min="0" />
                 <span asp-validation-for="CostoMantenimiento" class="text-danger"></span>
             </div>
 

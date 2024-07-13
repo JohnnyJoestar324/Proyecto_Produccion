@@ -4,28 +4,28 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Cálculo de EOQ</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Calcular nuevo EOQ</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Demanda)
+                Demanda
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CostoPedido)
+                Costo del Pedido
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CostoMantenimiento)
+                Costo de Mantenimiento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PeriodoSeleccionado)
+                Período
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Resultado)
+                Resultado EOQ
             </th>
             <th></th>
         </tr>
