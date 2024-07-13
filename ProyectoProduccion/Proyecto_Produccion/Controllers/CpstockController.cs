@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ using Proyecto_Produccion.Models;
 
 namespace Proyecto_Produccion.Controllers
 {
+    [Authorize]
+
     public class CpstockController : Controller
     {
         private readonly ProyectoProduccionContext _context;
@@ -58,6 +61,18 @@ namespace Proyecto_Produccion.Controllers
             if (ModelState.IsValid)
             {
 
+                int D = cpstock.Demanda;
+                int T = cpstock.TiempoReposo;
+                int SS = cpstock.InventarioSeguridad;
+
+                //Calcular Costo Promedio por Stock
+                int I = ((D * T) / 2) + SS;
+
+                //Calculo de retacion de inventario
+                int RotacionInventario = D / I;
+
+                cpstock.Resultado = $"El costo promedio en Stock es de: {I}." +
+                    $" La rotacion de inventario es: {RotacionInventario}.";
 
 
 
