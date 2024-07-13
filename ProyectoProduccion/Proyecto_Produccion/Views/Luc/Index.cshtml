@@ -1,62 +1,87 @@
-﻿@model IEnumerable<Proyecto_Produccion.Models.Luc>
+﻿@model List<Proyecto_Produccion.Models.Luc>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LUC Calculator</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-@{
-    ViewData["Title"] = "Index";
-}
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
 
-<h1>Index</h1>
+        th {
+            background-color: #f2f2f2;
+        }
 
-<p>
-    <a asp-action="Create">Calcular LUC</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.RequerimientoBruto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CostoMantenimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CostoDeOrdenar)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CostoTotal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CostoTotalU)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr style="@(item.CostoTotal == Model.Max(x => x.CostoTotal) || item.CostoTotal == Model.OrderByDescending(i => i.CostoTotal).Skip(1).Take(1).FirstOrDefault().CostoTotal ? "text-decoration: underline; background-color: yellow;" : "")">
+        .highlight-row {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora LUC</h1>
+    <form method="post" action="@Url.Action("CalculateLUC", "Luc")">
+        <label for="Periodo">Número de Períodos:</label>
+        <input type="number" id="Periodo" name="Periodo" required />
+        <br />
+        <label for="RequerimientoBruto">Requerimientos Brutos (separados por comas):</label>
+        <input type="text" id="RequerimientoBruto" name="RequerimientoBruto" required />
+        <br />
+        <label for="costoDeOrdenar">Costo de Ordenar:</label>
+        <input type="number" step="0.01" id="costoDeOrdenar" name="costoDeOrdenar" required />
+        <br />
+        <label for="CostoMantenimiento">Costo de Mantenimiento:</label>
+        <input type="number" step="0.01" id="CostoMantenimiento" name="CostoMantenimiento" required />
+        <br />
+        <button type="submit">Calcular LUC</button>
+    </form>
 
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.RequerimientoBruto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CostoMantenimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CostoDeOrdenar)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CostoTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CostoTotalU)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Idluc">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Idluc">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Idluc">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    @if (Model != null && Model.Count > 0)
+    {
+        <h2>Resultados LUC:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Período</th>
+                    <th>Unidades</th>
+                    <th>S</th>
+                    <th>K</th>
+                    <th>Costo Total</th>
+                    <th>Costo Total/ Unidades</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+
+
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr style="@(item.CostoTotal == Model.Max(x => x.CostoTotal) || item.CostoTotal == Model.OrderByDescending(i => i.CostoTotal).Skip(1).Take(1).FirstOrDefault().CostoTotal ? "text-decoration: underline; background-color: yellow;" : "")">
+                            <td>@item.Periodo</td>
+                            <td>@item.RequerimientoBruto</td>
+                            <td>@item.CostoDeOrdenar</td>
+                            <td>@item.CostoMantenimiento.ToString("C")</td>
+                            <td>@item.CostoTotal</td>
+                            <td>@item.CostoTotalU</td>
+
+
+                        </tr>
+                    }
+
+
+                }
+                }
+            </tbody>
+        </table>
+    }
+</body>
+</html>
