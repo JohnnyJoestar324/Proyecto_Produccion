@@ -12,6 +12,10 @@ public partial class CantidadKanbane
     [Column("IDCantidadKanbanes")]
     public short IdcantidadKanbanes { get; set; }
 
+    [StringLength(6)]
+    [Unicode(false)]
+    public string? Etiqueta { get; set; }
+
     [Column("Oferta_DPI")]
     public int? OfertaDpi { get; set; }
 
