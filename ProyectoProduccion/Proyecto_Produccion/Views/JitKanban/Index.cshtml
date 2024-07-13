@@ -31,29 +31,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Demanda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TiempoVuelta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TamañoRecipiente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.N)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InventarioMaximo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdJitKanban">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdJitKanban">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdJitKanban">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Demanda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TiempoVuelta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TamañoRecipiente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.N)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventarioMaximo)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdJitKanban">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdJitKanban">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdJitKanban">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
