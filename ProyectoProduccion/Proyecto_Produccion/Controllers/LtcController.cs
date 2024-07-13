@@ -45,21 +45,29 @@ namespace Proyecto_Produccion.Controllers
         // GET: Ltc/Create
         public IActionResult Create()
         {
+            ViewBag.NumeroPeriodos = 8; // Número de periodos predeterminado
             return View();
         }
+
 
         // POST: Ltc/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Idltc,Periodo,Unidades,PeridodosMantenidos,CostoMantenimiento,CostoMantenimientoAcumulado")] Ltc ltc, int numeroPeriodos, string requerimientosBrutos, decimal costoOrdenar, decimal costoMantenimiento)
+        public IActionResult Create(List<int?> requerimientosBrutos, decimal costoOrdenar, decimal costoMantenimiento)
         {
-            
             var results = new List<Ltc>();
 
-            // Convertir la cadena de requerimientos brutos en una lista de enteros
-            var unidades = requerimientosBrutos.Split(',').Select(int.Parse).ToList();
+            // Filtrar los valores nulos y contar los periodos válidos
+            var unidades = requerimientosBrutos.Where(x => x.HasValue).Select(x => x.Value).ToList();
+            var numeroPeriodos = unidades.Count;
+
+            if (numeroPeriodos == 0)
+            {
+                ModelState.AddModelError(string.Empty, "Debe ingresar al menos un requerimiento bruto.");
+                return View(new List<Ltc>());
+            }
 
             // Inicializamos los valores para el primer período
             var periodo = 0;
@@ -79,7 +87,7 @@ namespace Proyecto_Produccion.Controllers
                 // Guardamos los resultados en la lista
                 results.Add(new Ltc
                 {
-                    Periodo = periodo,
+                    Periodo = i + 1,  // Iniciamos los períodos desde 1
                     Unidades = unidadesPeriodo,
                     PeridodosMantenidos = periodosMantenidos,
                     CostoMantenimiento = costoMantenimientoPeriodo,
@@ -108,7 +116,7 @@ namespace Proyecto_Produccion.Controllers
             }
 
             ViewBag.CostoOrdenar = costoOrdenar;
-            ViewBag.NumeroPeriodos = numeroPeriodos;
+            ViewBag.NumeroPeriodos = 12; // Fijamos el número máximo de periodos a 12
             ViewBag.RequerimientosBrutos = requerimientosBrutos;
             ViewBag.CostoMantenimiento = costoMantenimiento;
 

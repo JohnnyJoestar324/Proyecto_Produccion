@@ -1,10 +1,10 @@
 ﻿@model List<Proyecto_Produccion.Models.Ltc>
 
 @{
-    ViewData["Title"] = "Crear LTC";
+    ViewData["Title"] = "Calculadora LTC";
 }
 
-<h1>Crear LTC</h1>
+<h1>Calculadora LTC</h1>
 <head>
     <title>LTC Calculator</title>
     <style>
@@ -26,38 +26,91 @@
         .highlight-row {
             background-color: yellow;
         }
+
+        .table-lg {
+            width: 100%;
+        }
+
+            .table-lg th, .table-lg td {
+                padding: 10px;
+                text-align: center;
+                vertical-align: middle;
+                word-wrap: break-word;
+            }
+
+        .input-lg {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+        }
+
+        #requisitosTable {
+            table-layout: fixed;
+        }
+
     </style>
 </head>
 
-<form asp-action="Create">
-    <div class="form-group">
-        <label>Número de Períodos:</label>
-        <input type="number" name="numeroPeriodos" required />
-    </div>
-    <div class="form-group">
-        <label>Requerimientos Brutos (separados por comas):</label>
-        <input type="text" name="requerimientosBrutos" required />
-    </div>
-    <div class="form-group">
-        <label>Costo de Ordenar:</label>
-        <input type="number" step="0.01" name="costoOrdenar" required />
-    </div>
-    <div class="form-group">
-        <label>Costo de Mantenimiento:</label>
-        <input type="number" step="0.01" name="costoMantenimiento" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Calcular LTC</button>
-</form>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-@if (Model != null && Model.Count > 0)
+            <div class="form-group">
+                <label for="costoOrdenar" class="control-label">Costo de Ordenar</label>
+                <input type="number" id="costoOrdenar" name="costoOrdenar" class="form-control" step="0.01" min="0" />
+            </div>
+
+            <div class="form-group">
+                <label for="costoMantenimiento" class="control-label">Costo de Mantenimiento</label>
+                <input type="number" id="costoMantenimiento" name="costoMantenimiento" class="form-control" step="0.01" min="0" />
+            </div>
+            <hr />
+            <div class="form-group">
+                <table id="requisitosTable" class="table table-bordered table-lg">
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;">Periodo</th>
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <th>@i</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="width: 150px;">Requerimiento Bruto</td>
+                            @for (int i = 0; i < 12; i++)
+                            {
+                                <td><input type="number" class="form-control input-lg" name="requerimientosBrutos[@i]" min="0" /></td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Calcular LTC" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr />
+@if (Model != null && Model.Any())
 {
-    <h2>Resultados LTC:</h2>
-    <table class="table">
+    <h3>Costos Ingresados</h3>
+    <p><strong>Costo de Ordenar:</strong> @ViewBag.CostoOrdenar</p>
+    <p><strong>Costo de Mantenimiento:</strong> @ViewBag.CostoMantenimiento</p>
+
+    <h3>Resultados</h3>
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Período</th>
+                <th>Periodo</th>
                 <th>Unidades</th>
-                <th>Períodos Mantenidos</th>
+                <th>Periodos Mantenidos</th>
                 <th>Costo de Mantenimiento</th>
                 <th>Costo de Mantenimiento Acumulado</th>
             </tr>
@@ -65,12 +118,12 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr class ="@(item.CostoMantenimientoAcumulado > ViewBag.CostoOrdenar ? "highlight-row" : "")">
+                <tr class="@(item.CostoMantenimientoAcumulado > ViewBag.CostoOrdenar ? "highlight-row" : "")">
                     <td>@item.Periodo</td>
                     <td>@item.Unidades</td>
                     <td>@item.PeridodosMantenidos</td>
-                    <td>@item.CostoMantenimiento.ToString("C")</td>
-                    <td>@item.CostoMantenimientoAcumulado.ToString("C")</td>
+                    <td>@item.CostoMantenimiento</td>
+                    <td>@item.CostoMantenimientoAcumulado</td>
                 </tr>
             }
         </tbody>

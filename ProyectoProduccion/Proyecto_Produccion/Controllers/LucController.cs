@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using NuGet.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Proyecto_Produccion.Models;
 
 namespace Proyecto_Produccion.Controllers
 {
     [Authorize]
-
     public class LucController : Controller
     {
         public IActionResult Index()
@@ -21,40 +16,28 @@ namespace Proyecto_Produccion.Controllers
         }
 
         [HttpPost]
-        public IActionResult CalculateLUC(int Periodo, string RequerimientoBruto, decimal costoDeOrdenar, decimal costoMantenimiento)
+        public IActionResult CalculateLUC(string[] requerimientosBrutos, decimal costoDeOrdenar, decimal costoMantenimiento)
         {
             var results = new List<Luc>();
 
-            // Convertir la cadena de requerimientos brutos en una lista de enteros
-            var unidades = RequerimientoBruto.Split(',').Select(int.Parse).ToList();
+            // Filtrar solo los valores no nulos o vacíos
+            var unidades = requerimientosBrutos.Where(r => !string.IsNullOrWhiteSpace(r)).Select(r => int.Parse(r)).ToList();
 
             // Inicializamos los valores para el primer período
             var periodo = 0;
-            var unidadesPeriodo = unidades[0];
-
-            bool primeraIteracion = true; // Bandera para identificar la primera iteración
+            var unidadesPeriodo = unidades.Any() ? unidades[0] : 0; // Tomamos el primer valor válido o 0 si no hay ninguno
+            bool primeraIteracion = true;
             int sumaAnterior = 0;
             int sumaAnteriorRequerimiento = 0;
             decimal sumaAnteriorK = 0;
-            decimal costoTotal;
-            decimal costoTotalAnterior = 0; // Variable para almacenar el costoTotal anterior
-
-
+            decimal costoTotal = 0;
+            decimal costoTotalAnterior = 0;
 
             // Iteramos sobre cada período
-            for (int i = 0; i < Periodo; i++)
+            for (int i = 0; i < unidades.Count; i++)
             {
-
-                // Obtenemos el valor de la fila actual
                 var periodoActual = unidades[i];
-
-                // Sumamos el valor actual con el valor de la fila anterior, si existe
-
-
-                // Calculamos el costo de mantenimiento para el período actual
                 var costoMantenimientoPeriodo = costoMantenimiento;
-
-
 
                 var sumaConAnterior = (i + 1) + sumaAnterior;
                 sumaAnterior = sumaConAnterior;
@@ -63,29 +46,20 @@ namespace Proyecto_Produccion.Controllers
 
                 if (primeraIteracion)
                 {
-                    sumaAnteriorK = 0; // Primera multiplicación con cero
-                    primeraIteracion = false; // Desactivar la bandera después de la primera iteración
+                    sumaAnteriorK = 0;
+                    primeraIteracion = false;
                     costoTotalAnterior = costoDeOrdenar;
-
                 }
-
                 else
                 {
-                    var SumaConAnteriorK = costoMantenimiento * sumaConAnterior * ((i + 1) - 1);
+                    var SumaConAnteriorK = costoMantenimiento * sumaConAnterior * (i + 1 - 1);
                     sumaAnteriorK = SumaConAnteriorK;
-                    costoTotal = costoTotalAnterior + sumaAnteriorK; // Sumar costoTotalAnterior con sumaAnteriorK
-                    costoTotalAnterior = costoTotal; // Actualizar costoTotalAnterior
+                    costoTotal = costoTotalAnterior + sumaAnteriorK;
+                    costoTotalAnterior = costoTotal;
                 }
 
-
-
-
-                // costoTotal = item.costoDeOrdenar + sumaAnteriorK;
                 var costoTotalUnidades = costoTotalAnterior / sumaConAnteriorRequerimiento;
 
-
-
-                // Guardamos los resultados en la lista
                 results.Add(new Luc
                 {
                     Periodo = sumaConAnterior,
@@ -94,16 +68,18 @@ namespace Proyecto_Produccion.Controllers
                     CostoMantenimiento = sumaAnteriorK,
                     CostoTotal = costoTotalAnterior,
                     CostoTotalU = costoTotalUnidades
-                }); ;
+                });
 
-                // Actualizamos las unidades para el próximo período
                 if (i < unidades.Count - 1)
                 {
                     unidadesPeriodo = unidades[i + 1];
                 }
             }
+
             ViewBag.CostoOrdenar = costoDeOrdenar;
-            // Retornamos la vista con los resultados
+            ViewBag.CostoMantenimiento = costoMantenimiento;
+            ViewBag.Results = results;
+
             return View("Index", results);
         }
     }

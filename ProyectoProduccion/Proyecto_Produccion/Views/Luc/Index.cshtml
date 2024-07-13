@@ -1,4 +1,5 @@
 ﻿@model List<Proyecto_Produccion.Models.Luc>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 
         th, td {
             border: 1px solid #dddddd;
-            text-align: left;
+            text-align: center;
             padding: 8px;
         }
 
@@ -22,63 +23,90 @@
         .highlight-row {
             background-color: yellow;
         }
+
+        .input-lg {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+        }
+
+        #requisitosTable {
+            table-layout: fixed;
+        }
     </style>
 </head>
 <body>
     <h1>Calculadora LUC</h1>
+    <hr />
     <form method="post" action="@Url.Action("CalculateLUC", "Luc")">
-        <label for="Periodo">Número de Períodos:</label>
-        <input type="number" id="Periodo" name="Periodo" required />
-        <br />
-        <label for="RequerimientoBruto">Requerimientos Brutos (separados por comas):</label>
-        <input type="text" id="RequerimientoBruto" name="RequerimientoBruto" required />
-        <br />
-        <label for="costoDeOrdenar">Costo de Ordenar:</label>
-        <input type="number" step="0.01" id="costoDeOrdenar" name="costoDeOrdenar" required />
-        <br />
-        <label for="CostoMantenimiento">Costo de Mantenimiento:</label>
-        <input type="number" step="0.01" id="CostoMantenimiento" name="CostoMantenimiento" required />
-        <br />
-        <button type="submit">Calcular LUC</button>
+        <div class="form-group">
+            <label for="costoDeOrdenar">Costo de Ordenar:</label>
+            <input type="number" id="costoDeOrdenar" name="costoDeOrdenar" class="form-control" step="0.01" min="0" required />
+        </div>
+
+        <div class="form-group">
+            <label for="CostoMantenimiento">Costo de Mantenimiento:</label>
+            <input type="number" id="CostoMantenimiento" name="CostoMantenimiento" class="form-control" step="0.01" min="0" required />
+        </div>
+        <hr />
+        <div class="form-group">
+            <table id="requisitosTable" class="table table-bordered table-lg">
+                <thead>
+                    <tr>
+                        <th style="width: 150px;">Periodo</th>
+                        @for (int i = 1; i <= 12; i++)
+                        {
+                            <th>@i</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width: 150px;">Requerimiento Bruto</td>
+                        @for (int i = 0; i < 12; i++)
+                        {
+                            <td><input type="number" class="form-control input-lg" name="requerimientosBrutos[@i]" min="0" /></td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Calcular LUC" class="btn btn-primary" />
+        </div>
     </form>
 
+    <hr />
     @if (Model != null && Model.Count > 0)
     {
-        <h2>Resultados LUC:</h2>
-        <table>
+        <h3>Costos Ingresados</h3>
+        <p><strong>Costo de Ordenar:</strong> @ViewBag.CostoOrdenar</p>
+        <p><strong>Costo de Mantenimiento:</strong> @ViewBag.CostoMantenimiento</p>
+
+        <h3>Resultados LUC</h3>
+        <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Período</th>
-                    <th>Unidades</th>
-                    <th>S</th>
-                    <th>K</th>
+                    <th>Periodo</th>
+                    <th>Requerimiento Bruto</th>
+                    <th>Costo de Ordenar</th>
+                    <th>Costo de Mantenimiento</th>
                     <th>Costo Total</th>
-                    <th>Costo Total/ Unidades</th>
-
+                    <th>Costo Total/Unidades</th>
                 </tr>
             </thead>
             <tbody>
-                @{
-
-
-
-                    @foreach (var item in Model)
-                    {
-
-                        <tr style="@(item.CostoTotal == Model.Max(x => x.CostoTotal) || item.CostoTotal == Model.OrderByDescending(i => i.CostoTotal).Skip(1).Take(1).FirstOrDefault().CostoTotal ? "text-decoration: underline; background-color: yellow;" : "")">
-                            <td>@item.Periodo</td>
-                            <td>@item.RequerimientoBruto</td>
-                            <td>@item.CostoDeOrdenar</td>
-                            <td>@item.CostoMantenimiento.ToString("C")</td>
-                            <td>@item.CostoTotal</td>
-                            <td>@item.CostoTotalU</td>
-
-
-                        </tr>
-                    }
-
-
-                }
+                @foreach (var item in Model)
+                {
+                    <tr style="@(item.CostoTotal == Model.Max(x => x.CostoTotal) || item.CostoTotal == Model.OrderByDescending(i => i.CostoTotal).Skip(1).Take(1).FirstOrDefault().CostoTotal ? "text-decoration: underline; background-color: yellow;" : "")">
+                        <td>@item.Periodo</td>
+                        <td>@item.RequerimientoBruto</td>
+                        <td>@item.CostoDeOrdenar.ToString("C")</td>
+                        <td>@item.CostoMantenimiento.ToString("C")</td>
+                        <td>@item.CostoTotal</td>
+                        <td>@item.CostoTotalU.ToString("N4")</td>
+                    </tr>
                 }
             </tbody>
         </table>
