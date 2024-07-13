@@ -9,6 +9,7 @@ namespace Proyecto_Produccion.Models;
 [Table("MantenimientoCorrectivo")]
 public partial class MantenimientoCorrectivo
 {
+    //cambio completado
     [Key]
     [Column("IDMantenimiento")]
     public short Idmantenimiento { get; set; }
