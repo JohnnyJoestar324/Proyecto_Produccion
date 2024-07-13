@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Proyecto_Produccion.Models.Cpfijo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Demanda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InventarioPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InventarioSeguridad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resultdado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Demanda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InventarioPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InventarioSeguridad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resultdado)
+            </td>
+            <td>
+               
+                <a asp-action="Delete" asp-route-id="@item.Idcpfijo">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

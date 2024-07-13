@@ -19,5 +19,7 @@ public partial class Cpstock
 
     public int InventarioSeguridad { get; set; }
 
-    public int? Resultado { get; set; }
+    [StringLength(300)]
+    [Unicode(false)]
+    public string? Resultado { get; set; }
 }
