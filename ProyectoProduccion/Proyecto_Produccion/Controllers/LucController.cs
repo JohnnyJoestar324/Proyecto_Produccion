@@ -5,10 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Configuration;
+using Microsoft.AspNetCore.Authorization;
 using Proyecto_Produccion.Models;
 
 namespace Proyecto_Produccion.Controllers
 {
+    [Authorize]
+
     public class LucController : Controller
     {
         public IActionResult Index()
