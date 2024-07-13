@@ -64,6 +64,55 @@ namespace Proyecto_Produccion.Controllers
             return View(cantidadKanbane);
         }
 
+        // GET: CantidadKanbanes/Calculate
+        public IActionResult Calculate()
+        {
+            return View();
+        }
+
+        // POST: CantidadKanbanes/Calculate
+        [HttpPost]
+        public async Task<IActionResult> Calculate(int periodos, List<int> DemandaDpi, List<int> OfertaDpi, List<decimal> TiempoDeEntrega, List<decimal> Retraso, List<decimal> StockDeSeguridad, List<decimal> CantidadAlmacenamiento)
+        {
+            //if (periodos <= 0)
+            //{
+            //    ModelState.AddModelError("", "El número de períodos debe ser mayor a cero.");
+            //    return View();
+            //}
+            var etiqueta = Guid.NewGuid().ToString().Substring(0, 6); // Generar etiqueta única
+            var resultados = new List<CantidadKanbane>();
+
+            for (int i = 0; i < periodos; i++)
+            {
+                var demandaReal = OfertaDpi[i] - DemandaDpi[i];
+                var L = TiempoDeEntrega[i] + Retraso[i];
+                var K = (demandaReal * L * (1 + StockDeSeguridad[i])) / CantidadAlmacenamiento[i];
+
+                var resultadoAbsoluto = Math.Abs(K);
+
+                resultados.Add(new CantidadKanbane
+                {
+                    Etiqueta = etiqueta,
+                    OfertaDpi = OfertaDpi[i],
+                    DemandaDpi = DemandaDpi[i],
+                    Demanda = demandaReal,
+                    TiempoDeEntrega = TiempoDeEntrega[i],
+                    Retraso = Retraso[i],
+                    StockDeSeguridad = StockDeSeguridad[i],
+                    CantidadAlmacenamiento = CantidadAlmacenamiento[i],
+                    Resultado = Math.Round(resultadoAbsoluto, 4) // Redondear a 4 decimales
+                });
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.AddRange(resultados);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(resultados);
+        }
+
         // GET: CantidadKanbanes/Edit/5
         public async Task<IActionResult> Edit(short? id)
         {

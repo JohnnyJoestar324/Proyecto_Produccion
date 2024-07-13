@@ -24,16 +24,16 @@ public partial class CantidadKanbane
 
     public int? Demanda { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
+    [Column(TypeName = "decimal(18, 2)")]
     public decimal? Retraso { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
+    [Column(TypeName = "decimal(18, 2)")]
     public decimal? TiempoDeEntrega { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
+    [Column(TypeName = "decimal(18, 2)")]
     public decimal? StockDeSeguridad { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
+    [Column(TypeName = "decimal(18, 2)")]
     public decimal? CantidadAlmacenamiento { get; set; }
 
     [Column(TypeName = "decimal(18, 0)")]

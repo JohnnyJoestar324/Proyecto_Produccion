@@ -4,74 +4,43 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Cálculo de Kanbanes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nuevo Cálculo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OfertaDpi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DemandaDpi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Demanda)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Retraso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TiempoDeEntrega)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockDeSeguridad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CantidadAlmacenamiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resultado)
-            </th>
+            <th>Etiqueta</th>
+            <th>Oferta</th>
+            <th>Demanda</th>
+            <th>DPI</th>
+            <th>Retraso</th>
+            <th>Tiempo de Entrega</th>
+            <th>Stock de Seguridad</th>
+            <th>Capacidad Almacenamiento</th>
+            <th>Kanbanes</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OfertaDpi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DemandaDpi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Demanda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Retraso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TiempoDeEntrega)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StockDeSeguridad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadAlmacenamiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resultado)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdcantidadKanbanes">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdcantidadKanbanes">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdcantidadKanbanes">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Etiqueta)</td>
+                <td>@Html.DisplayFor(modelItem => item.OfertaDpi)</td>
+                <td>@Html.DisplayFor(modelItem => item.DemandaDpi)</td>
+                <td>@Html.DisplayFor(modelItem => item.Demanda)</td>
+                <td>@Html.DisplayFor(modelItem => item.Retraso)</td>
+                <td>@Html.DisplayFor(modelItem => item.TiempoDeEntrega)</td>
+                <td>@Html.DisplayFor(modelItem => item.StockDeSeguridad)</td>
+                <td>@Html.DisplayFor(modelItem => item.CantidadAlmacenamiento)</td>
+                <td>@Html.DisplayFor(modelItem => item.Resultado)</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.IdcantidadKanbanes">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
