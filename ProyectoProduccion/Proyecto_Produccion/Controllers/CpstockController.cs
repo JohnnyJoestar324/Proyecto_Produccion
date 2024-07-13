@@ -57,6 +57,11 @@ namespace Proyecto_Produccion.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
+
+
+
                 _context.Add(cpstock);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
