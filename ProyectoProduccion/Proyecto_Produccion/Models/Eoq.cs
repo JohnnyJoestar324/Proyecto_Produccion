@@ -13,12 +13,15 @@ public partial class Eoq
     [Column("IDEOQ")]
     public short Ideoq { get; set; }
 
+    [Display(Name = "Demanda:")]
     public int Demanda { get; set; }
 
     [Column(TypeName = "money")]
+    [Display(Name = "Costo del Pedido:")]
     public decimal CostoPedido { get; set; }
 
     [Column(TypeName = "money")]
+    [Display(Name = "Costo de Mantenimiento:")]
     public decimal CostoMantenimiento { get; set; }
 
     public int PeriodoSeleccionado { get; set; }
