@@ -19,5 +19,7 @@ public partial class Cpfijo
 
     public int InventarioSeguridad { get; set; }
 
-    public int? Resultdado { get; set; }
+    [StringLength(300)]
+    [Unicode(false)]
+    public string? Resultdado { get; set; }
 }
