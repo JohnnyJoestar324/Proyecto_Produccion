@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Calculo de CP Fijo</h1>
 
 <p>
-    <a asp-action="Create">Crear nuevo CP Fijo</a>
+    <a asp-action="Create" style="color: #fff;">Crear nuevo CP Fijo</a>
 </p>
-<table class="table">
+<table class="styled-table">
     <thead>
         <tr>
             <th>
@@ -44,7 +44,7 @@
             </td>
             <td>
                
-                <a asp-action="Delete" asp-route-id="@item.Idcpfijo">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Idcpfijo" style="color: #fff;">Borrar CP Fijo</a>
             </td>
         </tr>
 }

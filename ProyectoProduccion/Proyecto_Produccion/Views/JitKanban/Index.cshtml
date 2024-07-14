@@ -7,9 +7,9 @@
 <h1>Cálculo de Recipientes</h1>
 
 <p>
-    <a asp-action="Create">Nuevo Cálculo</a>
+    <a asp-action="Create" style="color: #fff;">Nuevo Cálculo</a>
 </p>
-<table class="table">
+<table class="styled-table">
     <thead>
         <tr>
             <th>
@@ -50,7 +50,7 @@
                     @Html.DisplayFor(modelItem => item.InventarioMaximo)
                 </td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@item.IdJitKanban">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdJitKanban" style="color: #fff;">Borrar JIT Kanban</a>
                 </td>
             </tr>
         }
