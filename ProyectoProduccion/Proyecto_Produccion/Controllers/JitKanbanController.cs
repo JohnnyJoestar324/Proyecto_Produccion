@@ -68,7 +68,7 @@ namespace Proyecto_Produccion.Controllers
                 cantidadRecipiente = (DM * TV) / (60 * TR);
 
                 //calculo inventario acumulado
-                //decimal Maximo = cantidadRecipiente * TR;
+                
                 jitKanban.InventarioMaximo = cantidadRecipiente * TR;
                 
 
