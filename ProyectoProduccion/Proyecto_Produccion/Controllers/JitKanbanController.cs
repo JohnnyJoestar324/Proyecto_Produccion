@@ -18,10 +18,11 @@ namespace Proyecto_Produccion.Controllers
             _context = context;
         }
 
-        // GET: JitKanban
+        // GET: JitKanban/Index
         public async Task<IActionResult> Index()
         {
-            return View(await _context.JitKanbans.ToListAsync());
+            var jitKanbans = await _context.JitKanbans.ToListAsync();
+            return View(jitKanbans);
         }
 
         // GET: JitKanban/Details/5
@@ -45,7 +46,8 @@ namespace Proyecto_Produccion.Controllers
         // GET: JitKanban/Create
         public IActionResult Create()
         {
-            return View();
+            var jitKanban = new JitKanban(); // Crear una nueva instancia del modelo
+            return View(jitKanban);
         }
 
         // POST: JitKanban/Create
@@ -53,7 +55,7 @@ namespace Proyecto_Produccion.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdJitKanban,Demanda,TiempoVuelta,TamañoRecipiente,N,InventarioMaximo")] JitKanban jitKanban)
+        public async Task<IActionResult> Create([Bind("Demanda,TiempoVuelta,TamañoRecipiente,N,InventarioMaximo")] JitKanban jitKanban)
         {
             if (ModelState.IsValid)
             {
@@ -71,14 +73,21 @@ namespace Proyecto_Produccion.Controllers
                 
                 jitKanban.InventarioMaximo = cantidadRecipiente * TR;
                 
+                // Calcular N
+                jitKanban.N = (jitKanban.Demanda * jitKanban.TiempoVuelta) / (60 * jitKanban.TamañoRecipiente);
 
+                // Calcular Inventario Máximo
+                jitKanban.InventarioMaximo = jitKanban.N * jitKanban.TamañoRecipiente;
+
+                // Guardar en la base de datos
                 _context.Add(jitKanban);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
 
+                return RedirectToAction(nameof(Index));
             }
             return View(jitKanban);
         }
+
 
         // GET: JitKanban/Edit/5
         public async Task<IActionResult> Edit(short? id)

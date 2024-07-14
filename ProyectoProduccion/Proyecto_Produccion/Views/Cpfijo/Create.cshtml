@@ -6,24 +6,24 @@
 
 <h1>Nuevo CP Fijo</h1>
 
-<h4>Cpfijo</h4>
+<h4>Costo Promedio Fijo</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
                 <label asp-for="Demanda">Demanda</label>
-                <input asp-for="Demanda" class="form-control" />
+                <input asp-for="Demanda" type="number" class="form-control" step="0.01" min="0" />
                 <span asp-validation-for="Demanda" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="InventarioPedido">Cantidad de pedido de Inventario</label>
-                <input asp-for="InventarioPedido" class="form-control" />
+                <input asp-for="InventarioPedido" type="number" class="form-control" step="0.01" min="0" />
                 <span asp-validation-for="InventarioPedido" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="InventarioSeguridad">Inventario de Seguridad</label>
-                <input asp-for="InventarioSeguridad" class="form-control" />
+                <input asp-for="InventarioSeguridad" type="number" class="form-control" step="0.01" min="0" />
                 <span asp-validation-for="InventarioSeguridad" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Calcular Rotación</button>
@@ -32,7 +32,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar</a>
 </div>
 
 @section Scripts {

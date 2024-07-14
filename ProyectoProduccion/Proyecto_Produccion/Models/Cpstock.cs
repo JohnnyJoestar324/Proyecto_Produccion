@@ -15,11 +15,14 @@ public partial class Cpstock
 
     public int Demanda { get; set; }
 
+    [Display(Name = "Tiempo Reposo:")]
     public int TiempoReposo { get; set; }
-
+   
+    [Display(Name = "Inventario de Seguridad:")]
     public int InventarioSeguridad { get; set; }
 
     [StringLength(300)]
     [Unicode(false)]
+    [Display(Name = "Resultado:")]
     public string? Resultado { get; set; }
 }

@@ -1,0 +1,55 @@
+﻿@model List<Proyecto_Produccion.Models.CantidadKanbane>
+
+@{
+    ViewBag.Title = "Calcular Cantidad de Kanbanes";
+}
+
+<h1>Calcular Cantidad de Kanbanes</h1>
+
+<form id="kanbanForm" method="post" action="@Url.Action("Calculate", "CantidadKanbanes")">
+    <label for="periodos">Número de Períodos:</label>
+    <input type="number" id="periodos" name="periodos" min="1" required class="form-control" />
+    <button type="button" onclick="generarTabla()" class="btn btn-primary">Generar Tabla</button>
+
+    <div id="tablaDatos" style="margin-top: 20px;"></div>
+
+    <button type="submit" style="margin-top: 20px;" class="btn btn-success">Calcular Kanbanes</button>
+</form>
+
+@section Scripts {
+    <script>
+        // Función para generar la tabla dinámica
+        function generarTabla() {
+            var periodos = document.getElementById('periodos').value;
+            if (periodos <= 0) {
+                alert("El número de períodos debe ser mayor a cero.");
+                return;
+            }
+
+            var tabla = '<table class="table"><thead><tr><th>Período</th><th>Demanda</th><th>Oferta</th><th>Tiempo de Entrega</th><th>Retraso</th><th>Stock de Seguridad</th><th>Capacidad de Almacenamiento</th></tr></thead><tbody>';
+
+            for (var i = 0; i < periodos; i++) {
+                tabla += '<tr>' +
+                    '<td>' + (i + 1) + '</td>' +
+                    '<td><input type="number" name="DemandaDpi[' + i + ']" class="form-control" required min="0" /></td>' +
+                    '<td><input type="number" name="OfertaDpi[' + i + ']" class="form-control" required min="0" /></td>' +
+                    '<td><input type="number" step="0.01" name="TiempoDeEntrega[' + i + ']" class="form-control" required min="1" /></td>' +
+                    '<td><input type="number" step="0.01" name="Retraso[' + i + ']" class="form-control" required min="0" /></td>' +
+                    '<td><input type="number" step="0.01" name="StockDeSeguridad[' + i + ']" class="form-control" required min="0" /></td>' +
+                    '<td><input type="number" step="0.01" name="CantidadAlmacenamiento[' + i + ']" class="form-control" required min="0"/></td>' +
+                    '</tr>';
+            }
+
+            tabla += '</tbody></table>';
+            document.getElementById('tablaDatos').innerHTML = tabla;
+        }
+
+        // Manejar el evento "Enter" para evitar que se envíe el formulario prematuramente
+        document.getElementById('periodos').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                generarTabla();
+            }
+        });
+    </script>
+}
