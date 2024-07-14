@@ -59,7 +59,7 @@ namespace Proyecto_Produccion.Controllers
         {
             if (ModelState.IsValid)
             {
-                int DM = jitKanban.Demanda;
+                decimal DM = jitKanban.Demanda;
                 int TR = jitKanban.TamañoRecipiente;
                 decimal TV = jitKanban.TiempoVuelta;
                 decimal cantidadRecipiente = jitKanban.N;
