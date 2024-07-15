@@ -21,7 +21,7 @@ body {
     margin-bottom: 60px;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: url('https://th.bing.com/th/id/R.2f461ea8a5df694d6a61552c3e7a7be9?rik=EwkH3gTDV3Ug4w&riu=http%3a%2f%2fwww.solofondos.com%2fwp-content%2fuploads%2f2015%2f11%2fImagen-de-fondo-html.jpg&ehk=QnZhcwmkPEPsot0Zz0dFLVfL8fZIo6hYjpzjub2glCM%3d&risl=&pid=ImgRaw&r=0') no-repeat center center fixed;
+    background: url('/images/background.jpeg') no-repeat center center fixed;
     background-size: cover;
     color: #fff; /* Cambia el color del texto a blanco para asegurar la legibilidad */
     display: flex;
