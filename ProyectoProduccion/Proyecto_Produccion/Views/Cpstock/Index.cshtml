@@ -4,12 +4,12 @@
     ViewData["Title"] = "CP en Stock";
 }
 
-<h1>Index</h1>
+<h1>CP en Stock</h1>
 
 <p>
-    <a asp-action="Create">Crear nuevo CP en Stock</a>
+    <a asp-action="Create" style="color: #fff;">Crear nuevo CP en Stock</a>
 </p>
-<table class="table">
+<table class="styled-table">
     <thead>
         <tr>
             <th>
@@ -43,9 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Resultado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Idcpstock">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Idcpstock">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Idcpstock">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Idcpstock" style="color: #fff;">Borrar CP en Stock</a>
             </td>
         </tr>
 }

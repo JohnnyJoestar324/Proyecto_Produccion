@@ -7,9 +7,9 @@
 <h1>Cálculo de EOQ</h1>
 
 <p>
-    <a asp-action="Create">Calcular nuevo EOQ</a>
+    <a asp-action="Create" style="color: #fff;">Calcular nuevo EOQ</a>
 </p>
-<table class="table">
+<table class="styled-table">
     <thead>
         <tr>
             <th>
@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.Resultado)
             </td>
             <td>
-                <a asp-action="Delete" asp-route-id="@item.Ideoq">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Ideoq" style="color: #fff;">Borrar EOQ</a>
             </td>
         </tr>
 }
