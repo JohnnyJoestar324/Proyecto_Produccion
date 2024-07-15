@@ -63,10 +63,13 @@ namespace Proyecto_Produccion.Controllers
             if (ModelState.IsValid)
             {
                 // Calcular N
-                jitKanban.N = (jitKanban.Demanda * jitKanban.TiempoVuelta) / (60 * jitKanban.TamañoRecipiente);
+                //jitKanban.N = (jitKanban.Demanda * jitKanban.TiempoVuelta) / (60 * jitKanban.TamañoRecipiente);
+                var nValue = (jitKanban.Demanda * jitKanban.TiempoVuelta) / (60 * jitKanban.TamañoRecipiente);
+                jitKanban.N = Math.Round(nValue, 0); // Redondear al entero más cercano
 
                 // Calcular Inventario Máximo
-                jitKanban.InventarioMaximo = jitKanban.N * jitKanban.TamañoRecipiente;
+                var valuando = jitKanban.N * jitKanban.TamañoRecipiente;
+                jitKanban.InventarioMaximo = Math.Round(valuando, 0);
 
                 // Guardar en la base de datos
                 _context.Add(jitKanban);

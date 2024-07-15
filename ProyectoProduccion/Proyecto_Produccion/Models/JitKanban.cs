@@ -21,10 +21,10 @@ public partial class JitKanban
 
     public int TamañoRecipiente { get; set; }
 
-    [Column(TypeName = "decimal(18, 6)")]
-    [DisplayFormat(DataFormatString = "{0:#,0.######}", ApplyFormatInEditMode = true)]
+    [Column(TypeName = "decimal(18, 0)")]
+    //[DisplayFormat(DataFormatString = "{0:#,0.######}", ApplyFormatInEditMode = true)]
     public decimal N { get; set; }
 
-    [Column(TypeName = "decimal(18, 4)")]
+    [Column(TypeName = "decimal(18, 0)")]
     public decimal? InventarioMaximo { get; set; }
 }
