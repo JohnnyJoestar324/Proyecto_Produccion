@@ -7,9 +7,9 @@
 <h1>Cálculo de Kanbanes</h1>
 
 <p>
-    <a asp-action="Create">Nuevo Cálculo</a>
+    <a asp-action="Create"style="color: #fff;">Nuevo Cálculo</a>
 </p>
-<table class="table">
+<table class="styled-table">
     <thead>
         <tr>
             <th>Etiqueta</th>
@@ -38,7 +38,7 @@
                 <td>@Html.DisplayFor(modelItem => item.CantidadAlmacenamiento)</td>
                 <td>@Html.DisplayFor(modelItem => item.Resultado)</td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@item.IdcantidadKanbanes">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdcantidadKanbanes" style="color: #fff;">Borrar</a>
                 </td>
             </tr>
         }

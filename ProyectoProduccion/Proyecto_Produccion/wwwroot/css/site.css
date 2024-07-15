@@ -18,8 +18,39 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: url('https://th.bing.com/th/id/R.2f461ea8a5df694d6a61552c3e7a7be9?rik=EwkH3gTDV3Ug4w&riu=http%3a%2f%2fwww.solofondos.com%2fwp-content%2fuploads%2f2015%2f11%2fImagen-de-fondo-html.jpg&ehk=QnZhcwmkPEPsot0Zz0dFLVfL8fZIo6hYjpzjub2glCM%3d&risl=&pid=ImgRaw&r=0') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff; /* Cambia el color del texto a blanco para asegurar la legibilidad */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
+
+.text-center {
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar la legibilidad del texto */
+    border-radius: 10px; /* Esquinas redondeadas para el contenedor de texto */
+}
+
+.container {
+    flex: 1;
+}
+
+.footer {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para mejorar la legibilidad del texto */
+    color: #fff; /* Cambia el color del texto a blanco para asegurar la legibilidad */
+    padding: 10px;
+    text-align: center;
+}
+
+    .footer .body {
+        margin: 0;
+        padding: 0;
+        color: #fff !important; /* Asegura que el color del texto sea blanco */
+    }
 
 .highlight-row {
     background-color: yellow;
@@ -41,3 +72,46 @@ footer.border-top.footer.text-muted {
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }
+
+.table-container {
+    width: 80%;
+    margin: 20px auto;
+    overflow-x: auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+    .styled-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+        
+    }
+
+    .styled-table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+        
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
